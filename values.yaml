@@ -1,0 +1,107 @@
+# Default values for openshift-console.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: quay.io/openshift/origin-console
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "default"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+secret:
+  secretName: idp-secret
+  create: true
+  clientSecret: 
+oidcIdentityProvider: ""
+
+# only modify the string elements, not the claim keys
+claims:
+  preferredUsername:
+  - preferred_username
+  name:
+  - name
+  email:
+  - email
+  groups:
+  - groups
+
+environmentVariables: {}
+
+# merged with environmentVariables
+bridgeEnvironmentVariables:
+  BRIDGE_USER_AUTH: oidc
+  BRIDGE_K8S_AUTH: oidc
+  # BRIDGE_K8S_AUTH_BEARER_TOKEN: #aws eks get-token --cluster-name $cluster | jq -r .status.token
+  BRIDGE_BASE_ADDRESS: # "https://my-console.cluster.example.com"
+  BRIDGE_USER_AUTH_OIDC_CLIENT_ID: # BRIDGE_USER_AUTH_OIDC_CLIENT_ID
+  BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET:
+  BRIDGE_USER_AUTH_OIDC_ISSUER_URL: # https://my-oidc-prodiver.okta.jumpcloud.example.com
+
+# log-level
+verbosity: 1
+
+service:
+  type: ClusterIP
+  port: 9000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
