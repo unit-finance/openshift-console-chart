@@ -8,9 +8,7 @@ metadata:
   labels:
     {{- include "openshift-console.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "openshift-console.selectorLabels" . | nindent 6 }}
