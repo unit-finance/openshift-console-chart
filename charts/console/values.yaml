@@ -53,7 +53,7 @@ claims:
   groups:
   - groups
 
-environmentVariables: {}
+environmentVariables: []
 
 # merged with environmentVariables
 bridgeEnvironmentVariables:
