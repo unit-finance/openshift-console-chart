@@ -59,7 +59,6 @@ environmentVariables: {}
 bridgeEnvironmentVariables:
   BRIDGE_USER_AUTH: oidc
   BRIDGE_K8S_AUTH: oidc
-  # BRIDGE_K8S_AUTH_BEARER_TOKEN: #aws eks get-token --cluster-name $cluster | jq -r .status.token
   BRIDGE_BASE_ADDRESS: # "https://my-console.cluster.example.com"
   BRIDGE_USER_AUTH_OIDC_CLIENT_ID: # BRIDGE_USER_AUTH_OIDC_CLIENT_ID
   BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET:
