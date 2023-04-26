@@ -3,6 +3,16 @@ entries:
   openshift-console:
   - apiVersion: v2
     appVersion: 4.8.0
+    created: "2023-04-26T02:45:17.637503089Z"
+    description: A Helm chart for Kubernetes
+    digest: 1ec4679709bcb1e56a60c5706cf4b80ebba6b1209134cb39f3fbe9a9b243fb48
+    name: openshift-console
+    type: application
+    urls:
+    - https://github.com/asaf400/openshift-console-chart/releases/download/openshift-console-0.1.8/openshift-console-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 4.8.0
     created: "2023-04-26T02:42:27.82251355Z"
     description: A Helm chart for Kubernetes
     digest: 25b5d5c130ec4e49dc54c1262b2399eed30f2dbe1311259fd9066836bce5cb03
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/asaf400/openshift-console-chart/releases/download/openshift-console-0.1.2/openshift-console-0.1.2.tgz
     version: 0.1.2
-generated: "2023-04-26T02:42:27.82253475Z"
+generated: "2023-04-26T02:45:17.63753029Z"
