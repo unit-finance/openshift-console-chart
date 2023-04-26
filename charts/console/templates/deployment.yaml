@@ -48,9 +48,7 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.environmentVariables }}
           env:
-            {{- toYaml . | nindent 12 }}
             - name: BRIDGE_BASE_ADDRESS
               value: {{ .Values.bridgeEnvironmentVariables.BRIDGE_BASE_ADDRESS }}
             - name: BRIDGE_USER_AUTH
@@ -68,7 +66,6 @@ spec:
               value: {{ .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_ISSUER_URL }}
             - name: BRIDGE_V
               value: {{ .Values.verbosity }}
-          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

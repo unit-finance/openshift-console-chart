@@ -53,9 +53,6 @@ claims:
   groups:
   - groups
 
-environmentVariables: []
-
-# merged with environmentVariables
 bridgeEnvironmentVariables:
   BRIDGE_USER_AUTH: oidc
   BRIDGE_K8S_AUTH: oidc
