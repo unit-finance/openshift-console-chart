@@ -56,6 +56,15 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
               {{- end }}
+          {{- if .Values.ingress.sslRedirect }}
+          - path: {{ .path }}
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation
+            pathType: {{ .pathType }}
+          {{- end }}
           {{- end }}
     {{- end }}
 {{- end }}

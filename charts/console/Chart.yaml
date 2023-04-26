@@ -5,7 +5,7 @@ description: A Helm chart for Kubernetes
 type: application
 
 # This is the chart version.
-version: 0.2.2
+version: 0.2.3
 
 # This is the version number of the application being deployed.
 appVersion: "4.8.0" # https://access.redhat.com/support/policy/updates/openshift # paragraph "OpenShift Support Matrix"
