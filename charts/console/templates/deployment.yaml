@@ -1,6 +1,5 @@
 {{- $name := .Values.bridgeEnvironmentVariables.BRIDGE_BASE_ADDRESS | required ".Values.bridgeEnvironmentVariables.BRIDGE_BASE_ADDRESS is required." -}}
 {{- $name := .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_CLIENT_ID | required ".Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_CLIENT_ID  is required." -}}
-{{- $name := .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET | required ".Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET is required." -}}
 {{- $name := .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_ISSUER_URL | required ".Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_ISSUER_URL is required." -}}
 # {{- $name := .Values.bridgeEnvironmentVariables.BRIDGE_K8S_AUTH_BEARER_TOKEN | required ".Values.bridgeEnvironmentVariables.BRIDGE_K8S_AUTH_BEARER_TOKEN is required." -}}
 apiVersion: apps/v1
