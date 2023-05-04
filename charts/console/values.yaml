@@ -8,7 +8,7 @@ image:
   repository: quay.io/openshift/origin-console
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "4.11.0" # 4.11.0 introduces 'dark mode' by default.
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,8 +58,10 @@ bridgeEnvironmentVariables:
   BRIDGE_K8S_AUTH: oidc
   BRIDGE_BASE_ADDRESS: # "https://my-console.cluster.example.com"
   BRIDGE_USER_AUTH_OIDC_CLIENT_ID: # BRIDGE_USER_AUTH_OIDC_CLIENT_ID
-  BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET:
   BRIDGE_USER_AUTH_OIDC_ISSUER_URL: # https://my-oidc-prodiver.okta.jumpcloud.example.com
+  # BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET defaults to consuming vaule from values.secret.secretName
+
+extraEnv:
 
 # log-level
 verbosity: 1

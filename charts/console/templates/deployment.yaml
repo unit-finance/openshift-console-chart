@@ -66,6 +66,9 @@ spec:
               value: {{ .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_ISSUER_URL }}
             - name: BRIDGE_V
               value: {{ .Values.verbosity | quote }}
+          {{- with .Values.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
