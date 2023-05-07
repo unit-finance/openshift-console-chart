@@ -56,7 +56,7 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
               {{- end }}
-          {{- if .Values.ingress.sslRedirect }}
+          {{- if $.Values.ingress.sslRedirect }}
           - path: {{ .path }}
             backend:
               service:

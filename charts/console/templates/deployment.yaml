@@ -49,6 +49,9 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            {{- if .Values.extraEnv }}
+              {{- toYaml .Values.extraEnv | nindent 12 }}
+            {{- end }}
             - name: BRIDGE_BASE_ADDRESS
               value: {{ .Values.bridgeEnvironmentVariables.BRIDGE_BASE_ADDRESS }}
             - name: BRIDGE_USER_AUTH
@@ -66,9 +69,6 @@ spec:
               value: {{ .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_ISSUER_URL }}
             - name: BRIDGE_V
               value: {{ .Values.verbosity | quote }}
-          {{- with .Values.extraEnv }}
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
