@@ -41,6 +41,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
+        {{- range .paths }}
           {{- if $.Values.ingress.sslRedirect }}
           - path: {{ .path }}
             backend:
@@ -50,7 +51,7 @@ spec:
                   name: use-annotation
             pathType: {{ .pathType }}
           {{- end }}
-          {{- range .paths }}
+
           - path: {{ .path }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .pathType }}
@@ -64,7 +65,7 @@ spec:
               {{- else }}
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
-              {{- end }}
-          {{- end }}
+            {{- end }}
+        {{- end }}
     {{- end }}
 {{- end }}
