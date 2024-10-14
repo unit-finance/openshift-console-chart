@@ -50,6 +50,34 @@ app.kubernetes.io/name: {{ include "openshift-console.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+{{- define "openshift-console.authnKey" -}}
+{{- $existing := lookup "v1" "Secret" .Release.Namespace (include "openshift-console.fullname" . ) -}}
+{{- $authnKey := default (randAlphaNum 32 | b64enc) .Values.secrets.oidcCookiesEncryption.authnKey -}}
+{{- if $existing.data -}}
+  {{- if $existing.data.authnKey -}}
+    {{ " " $existing.data.authnKey }}
+  {{- else -}}
+    {{- $authnKey | indent 1 }}
+  {{- end }}
+{{- else -}}
+  {{- $authnKey | indent 1  }}
+{{- end }}
+{{- end }}
+
+{{- define "openshift-console.encryptKey" -}}
+{{- $existing := lookup "v1" "Secret" .Release.Namespace (include "openshift-console.fullname" . ) -}}
+{{- $encryptKey := default (randAlphaNum 32 | b64enc) .Values.secrets.oidcCookiesEncryption.encryptKey -}}
+{{- if $existing.data -}}
+  {{- if $existing.data.encryptKey -}}
+    {{- $existing.data.encryptKey }}
+  {{- else -}}
+    {{- $encryptKey | indent 1 }}
+  {{- end }}
+{{- else -}}
+  {{- $encryptKey | indent 1 }}
+{{- end }}
+{{- end }}
+
 {{/*
 Create the name of the service account to use
 */}}

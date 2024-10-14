@@ -34,6 +34,13 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: oidc-cookie-encryption
+              mountPath: /etc/bridge/oidc-authnKey
+              subPath: authnKey
+            - name: oidc-cookie-encryption
+              mountPath: /etc/bridge/oidc-encryptKey
+              subPath: encryptKey
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -63,12 +70,18 @@ spec:
             - name: BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef: 
-                  name: {{ .Values.secret.secretName }}
+                  name: {{ .Values.secrets.idpSecret.secretName }}
                   key: clientSecret
             - name: BRIDGE_USER_AUTH_OIDC_ISSUER_URL
               value: {{ .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH_OIDC_ISSUER_URL }}
             - name: BRIDGE_V
               value: {{ .Values.verbosity | quote }}
+            {{- if eq .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH "oidc" }}
+            - name: BRIDGE_COOKIE_ENCRYPTION_KEY_FILE
+              value: "/etc/bridge/oidc-encryptKey"
+            - name: BRIDGE_COOKIE_AUTHENTICATION_KEY_FILE
+              value: "/etc/bridge/oidc-authnKey"
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -81,3 +94,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if eq .Values.bridgeEnvironmentVariables.BRIDGE_USER_AUTH "oidc" }}
+      volumes:
+        - name: oidc-cookie-encryption
+          secret:
+            secretName: {{ .Values.secrets.oidcCookiesEncryption.secretName }}
+      {{- end }}
+

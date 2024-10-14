@@ -8,7 +8,7 @@ image:
   repository: quay.io/openshift/origin-console
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "4.11.0" # 4.11.0 introduces 'dark mode' by default.
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -36,10 +36,17 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-secret:
-  secretName: idp-secret
-  create: true
-  clientSecret: 
+secrets:
+  idpSecret:
+    secretName: idp-secret
+    create: true
+    clientSecret:
+  oidcCookiesEncryption:
+    secretName: oidc-cookies-encryption
+    create: true
+    # base64 encoded string
+    # authnKey:
+    # encryptKey:
 oidcIdentityProvider: ""
 
 # only modify the string elements, not the claim keys
@@ -59,7 +66,7 @@ bridgeEnvironmentVariables:
   BRIDGE_BASE_ADDRESS: # "https://my-console.cluster.example.com"
   BRIDGE_USER_AUTH_OIDC_CLIENT_ID: # BRIDGE_USER_AUTH_OIDC_CLIENT_ID
   BRIDGE_USER_AUTH_OIDC_ISSUER_URL: # https://my-oidc-prodiver.okta.jumpcloud.example.com
-  # BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET defaults to consuming vaule from values.secret.secretName
+  # BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET defaults to consuming vaule from values.secrets.idpSecret.secretName
 
 extraEnv: ""
   # - name: BRIDGE_INACTIVITY_TIMEOUT
