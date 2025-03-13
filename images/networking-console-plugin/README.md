@@ -1,0 +1,1 @@
+[Build this Dockerfile with acompanying files in this context dir](https://github.com/openshift/networking-console-plugin/tree/e8a088c118898075f0c6ae01476630833c33da97)

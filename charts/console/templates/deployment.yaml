@@ -53,8 +53,7 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
           env:
             {{- if .Values.extraEnv }}
               {{- toYaml .Values.extraEnv | nindent 12 }}
@@ -82,6 +81,41 @@ spec:
             - name: BRIDGE_COOKIE_AUTHENTICATION_KEY_FILE
               value: "/etc/bridge/oidc-authnKey"
             {{- end }}
+            {{- if .Values.plugins }}
+            - name: BRIDGE_PLUGINS
+              value: {{ include "plugins-environment-value" . }}
+            {{- end }}
+        {{- if .Values.plugins }}
+          {{- range .Values.plugins }}
+        - name: {{ .name }}
+          resources: {{- toYaml $.Values.resources | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: plugin
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: plugin
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          securityContext: {{- toYaml $.Values.securityContext | nindent 12 }}
+          ports:
+            - name: plugin
+              containerPort: {{ .port }}
+              protocol: TCP
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          image: {{ .image }}
+          {{- end }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

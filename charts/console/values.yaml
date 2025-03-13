@@ -52,20 +52,20 @@ oidcIdentityProvider: ""
 # only modify the string elements, not the claim keys
 claims:
   preferredUsername:
-  - preferred_username
+    - preferred_username
   name:
-  - name
+    - name
   email:
-  - email
+    - email
   groups:
-  - groups
+    - groups
 
 bridgeEnvironmentVariables:
-  BRIDGE_USER_AUTH: oidc
-  BRIDGE_K8S_AUTH: oidc
-  BRIDGE_BASE_ADDRESS: # "https://my-console.cluster.example.com"
-  BRIDGE_USER_AUTH_OIDC_CLIENT_ID: # BRIDGE_USER_AUTH_OIDC_CLIENT_ID
-  BRIDGE_USER_AUTH_OIDC_ISSUER_URL: # https://my-oidc-prodiver.okta.jumpcloud.example.com
+  # BRIDGE_USER_AUTH: oidc
+  # BRIDGE_K8S_AUTH: oidc
+  # BRIDGE_BASE_ADDRESS: "https://my-console.cluster.example.com"
+  # BRIDGE_USER_AUTH_OIDC_CLIENT_ID: BRIDGE_USER_AUTH_OIDC_CLIENT_ID
+  # BRIDGE_USER_AUTH_OIDC_ISSUER_URL: https://my-oidc-prodiver.okta.jumpcloud.example.com
   # BRIDGE_USER_AUTH_OIDC_CLIENT_SECRET defaults to consuming vaule from values.secrets.idpSecret.secretName
 
 extraEnv: ""
@@ -93,6 +93,16 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+# Enable Plugins - run as a sidecar
+# Since version 4.17 network tab has been extracted from console repo into a console dynamic plugin
+plugins: []
+  # - name: networking-console-plugin
+  #   image: asaf400/openshift:networking-console-plugin-e8a088c
+  #   port: 8080
+  # - name: monitoring-plugin
+  #   image: asaf400/openshift:monitoring-plugin
+  #   port: 8081
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

@@ -1,0 +1,1 @@
+[Build this Dockerfile with acompanying files in this context dir](https://github.com/openshift/monitoring-plugin/blob/release-4.17/)

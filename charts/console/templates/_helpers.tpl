@@ -88,3 +88,12 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "plugins-environment-value" }}
+{{- $result := list -}}
+{{- range .Values.plugins -}}
+  {{- $port := int .port -}}
+  {{- $result = append $result (printf "%s=http://localhost:%d" .name $port) -}}
+{{- end -}}
+{{- join "," $result -}}
+{{- end -}}
