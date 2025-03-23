@@ -108,6 +108,9 @@ spec:
             successThreshold: 1
             failureThreshold: 3
           securityContext: {{- toYaml $.Values.securityContext | nindent 12 }}
+          env:
+            - name: NGINX_PORT
+              value: "{{ .port }}"
           ports:
             - name: plugin
               containerPort: {{ .port }}
