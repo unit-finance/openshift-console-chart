@@ -3,6 +3,16 @@ entries:
   openshift-console:
   - apiVersion: v2
     appVersion: 4.17.0
+    created: "2025-03-23T12:03:40.084577469Z"
+    description: A Helm chart for Kubernetes
+    digest: a95b8df7013a8fdbff95649e82e75f48322c7c7c9de0e0dff4fc5befaface417
+    name: openshift-console
+    type: application
+    urls:
+    - https://github.com/unit-finance/openshift-console-chart/releases/download/openshift-console-2.0.1/openshift-console-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v2
+    appVersion: 4.17.0
     created: "2025-03-13T18:26:23.094904484Z"
     description: A Helm chart for Kubernetes
     digest: 6c8215d5cec08d8ddd08b35e842182c01fd6023cf474631d08c2ac01cd320403
@@ -91,4 +101,4 @@ entries:
     urls:
     - https://github.com/unit-finance/openshift-console-chart/releases/download/openshift-console-0.4.0/openshift-console-0.4.0.tgz
     version: 0.4.0
-generated: "2025-03-13T18:26:23.094939719Z"
+generated: "2025-03-23T12:03:40.084631139Z"
