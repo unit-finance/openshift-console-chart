@@ -61,8 +61,8 @@ claims:
     - groups
 
 bridgeEnvironmentVariables:
-  # BRIDGE_USER_AUTH: oidc
-  # BRIDGE_K8S_AUTH: oidc
+  BRIDGE_USER_AUTH: oidc
+  BRIDGE_K8S_AUTH: oidc
   # BRIDGE_BASE_ADDRESS: "https://my-console.cluster.example.com"
   # BRIDGE_USER_AUTH_OIDC_CLIENT_ID: BRIDGE_USER_AUTH_OIDC_CLIENT_ID
   # BRIDGE_USER_AUTH_OIDC_ISSUER_URL: https://my-oidc-prodiver.okta.jumpcloud.example.com
